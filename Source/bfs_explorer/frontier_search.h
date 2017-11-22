@@ -21,6 +21,7 @@ struct Frontier {
   std::vector<NS_DataType::Point> points;
 };
 
+
 /**
  * @brief Thread-safe implementation of a frontier-search task for an input
  * costmap.

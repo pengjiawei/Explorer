@@ -1,6 +1,8 @@
 /**
  * attention : what to do with this rely on costMap
  */
+#ifndef SEEXPLORER_H_
+#define SEEXPLORER_H_
 
 #include <memory>
 
@@ -84,3 +86,4 @@ private:
 	  bool running;
 };
 }
+#endif

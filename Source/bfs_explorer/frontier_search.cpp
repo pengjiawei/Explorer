@@ -1,21 +1,16 @@
 #include "frontier_search.h"
-
-
-
-
-
 #include <DataSet/DataType/Point.h>
-
 #include "costmap_tools.h"
+
 
 
 using namespace NS_CostMap;
 
 namespace frontier_exploration
 {
-//using costmap_2d::LETHAL_OBSTACLE;
-//using costmap_2d::NO_INFORMATION;
-//using costmap_2d::FREE_SPACE;
+bool lessFrontierCost(Frontier& f1,Frontier& f2){
+	return f1.cost < f2.cost;
+}
 
 FrontierSearch::FrontierSearch(NS_ServiceType::ServiceMap& service_map,
                                double potential_scale, double gain_scale,
@@ -126,13 +121,14 @@ std::vector<Frontier> FrontierSearch::searchFrom(NS_DataType::Point position)
   }
   fclose(visit_file);
   // set costs of frontiers
-  for (auto& frontier : frontier_list) {
+  for (Frontier& frontier : frontier_list) {
     frontier.cost = frontierCost(frontier);
   }
-  std::sort(
-      frontier_list.begin(), frontier_list.end(),
-      [](const Frontier& f1, const Frontier& f2) { return f1.cost < f2.cost; });
+//  std::sort(
+//      frontier_list.begin(), frontier_list.end(),
+//      [](const Frontier& f1, const Frontier& f2) { return f1.cost < f2.cost; });
 
+  std::sort(frontier_list.begin(),frontier_list.end(),lessFrontierCost);
   return frontier_list;
 }
 
@@ -239,4 +235,6 @@ double FrontierSearch::frontierCost(const Frontier& frontier)
           resolution_) -
          (gain_scale_ * frontier.size * resolution_);
 }
+
+
 }
