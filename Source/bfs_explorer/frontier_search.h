@@ -1,10 +1,9 @@
 #ifndef FRONTIER_SEARCH_H_
 #define FRONTIER_SEARCH_H_
 
-#include "CostMap/CostmapWrapper.h"
 #include <DataSet/DataType/Point.h>
 #include <Service/ServiceType/ServiceMap.h>
-
+#include <Service/Client.h>
 namespace frontier_exploration
 {
 /**

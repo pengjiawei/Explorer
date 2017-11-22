@@ -36,14 +36,6 @@ Source/Main.o: ../Source/Main.cpp ../Source/SeExplorer.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/../../DataSet/DataType/Pose.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/../../DataSet/DataType/../../Serialization/Serialization.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/ServiceBase.h \
- ../Source/bfs_explorer/frontier_search.h \
- /home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostmapWrapper.h \
- /home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostMap2D/CostMapLayer.h \
- /home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostMap2D/Layer.h \
- /home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostMap2D/CostMap2D.h \
- /home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostMap2D/LayeredCostMap.h \
- /home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostMap2D/CostValues.h \
- /home/cybernik/Development/Projects/SeNaviCommon/Source/DataSet/DataType/OccupancyGrid.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Transform/DataTypes.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Transform/../DataSet/DataType/PointStamped.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Transform/../DataSet/DataType/DataBase.h \
@@ -67,15 +59,12 @@ Source/Main.o: ../Source/Main.cpp ../Source/SeExplorer.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Transform/LinearMath/Vector3.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Transform/LinearMath/Quaternion.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Transform/LinearMath/QuadWord.h \
- /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/ServiceBase.h \
- /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/ServiceTransform.h \
- /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/../../DataSet/DataType/Transform.h \
+ ../Source/bfs_explorer/frontier_search.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/Client.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/Service.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/ServiceBase.h \
  /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/../Console/Console.h \
- /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/../Serialization/Serialization.h \
- /home/cybernik/Development/Projects/SeNaviCommon/Source/Serialization/Serialization.h
+ /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/../Serialization/Serialization.h
 
 ../Source/SeExplorer.h:
 
@@ -153,22 +142,6 @@ Source/Main.o: ../Source/Main.cpp ../Source/SeExplorer.h \
 
 /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/ServiceBase.h:
 
-../Source/bfs_explorer/frontier_search.h:
-
-/home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostmapWrapper.h:
-
-/home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostMap2D/CostMapLayer.h:
-
-/home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostMap2D/Layer.h:
-
-/home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostMap2D/CostMap2D.h:
-
-/home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostMap2D/LayeredCostMap.h:
-
-/home/cybernik/Development/Projects/SeNavigation/Source/CostMap/CostMap2D/CostValues.h:
-
-/home/cybernik/Development/Projects/SeNaviCommon/Source/DataSet/DataType/OccupancyGrid.h:
-
 /home/cybernik/Development/Projects/SeNaviCommon/Source/Transform/DataTypes.h:
 
 /home/cybernik/Development/Projects/SeNaviCommon/Source/Transform/../DataSet/DataType/PointStamped.h:
@@ -215,11 +188,7 @@ Source/Main.o: ../Source/Main.cpp ../Source/SeExplorer.h \
 
 /home/cybernik/Development/Projects/SeNaviCommon/Source/Transform/LinearMath/QuadWord.h:
 
-/home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/ServiceBase.h:
-
-/home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/ServiceTransform.h:
-
-/home/cybernik/Development/Projects/SeNaviCommon/Source/Service/ServiceType/../../DataSet/DataType/Transform.h:
+../Source/bfs_explorer/frontier_search.h:
 
 /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/Client.h:
 
@@ -230,5 +199,3 @@ Source/Main.o: ../Source/Main.cpp ../Source/SeExplorer.h \
 /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/../Console/Console.h:
 
 /home/cybernik/Development/Projects/SeNaviCommon/Source/Service/../Serialization/Serialization.h:
-
-/home/cybernik/Development/Projects/SeNaviCommon/Source/Serialization/Serialization.h:

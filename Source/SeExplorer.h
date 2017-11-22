@@ -17,7 +17,7 @@
 #include <DataSet/Subscriber.h>
 #include <Service/ServiceType/ServiceMap.h>
 #include <algorithm>
-
+#include <Transform/DataTypes.h>
 #include "bfs_explorer/frontier_search.h"
 
 namespace NS_Explorer {

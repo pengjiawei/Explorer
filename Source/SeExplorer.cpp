@@ -19,7 +19,6 @@ inline static bool operator==(const NS_DataType::Point& one,
   double dist = sqrt(dx * dx + dy * dy);
   return dist < 0.01;
 }
-NS_Service::Client< NS_CostMap::CostmapWrapper >* global_costmap_cli;
 namespace NS_Explorer{
 ExplorerApplication::ExplorerApplication()
 {
