@@ -80,7 +80,7 @@ private:
 	    NS_ServiceType::ServiceMap srv_map_;
 
 
-	  NS_DataSet::Publisher< NS_DataType::Pose >* goal_pub;
+	  NS_DataSet::Publisher< NS_DataType::PoseStamped >* goal_pub;
 
 	  NS_Service::Client< NS_ServiceType::ServiceMap >* map_cli;
 

@@ -32,13 +32,14 @@ ExplorerApplication::ExplorerApplication()
 
 //  explore_costmap_->start ();
 
-	goal_pub = new NS_DataSet::Publisher< NS_DataType::Pose >("GOAL_FROM_APP");
+	goal_pub = new NS_DataSet::Publisher< NS_DataType::PoseStamped >("GOAL");
 	explore_sub = new NS_DataSet::Subscriber< bool >("IS_EXPLORING",
 				boost::bind(&ExplorerApplication::isExploringCallback, this, _1));
 
 
 	current_pose_cli = new NS_Service::Client<NS_DataType::PoseStamped>(
 			"CURRENT_POSE");
+
 }
 
 ExplorerApplication::~ExplorerApplication(){
@@ -150,10 +151,10 @@ void ExplorerApplication::makePlan() {
 	  goal_pose.header.stamp = NS_NaviCommon::Time::now();
 	  printf("goal_pose = (%.4f,%.4f)\n",goal_pose.pose.position.x,goal_pose.pose.position.y);
 
-	  NS_DataType::Pose published_pose;
-	  published_pose.position.x = goal_pose.pose.position.x;
-	  published_pose.position.y = goal_pose.pose.position.y;
-	  published_pose.orientation = NS_Transform::createQuaternionMsgFromYaw(0.0);
+	  NS_DataType::PoseStamped published_pose;
+	  published_pose.pose.position.x = goal_pose.pose.position.x;
+	  published_pose.pose.position.y = goal_pose.pose.position.y;
+	  published_pose.pose.orientation = NS_Transform::createQuaternionMsgFromYaw(0.0);
 	  printf("print goal to global planner------------------\n");
 	  goal_pub->publish(published_pose);
 	  NS_DataType::Point middle_point = frontier->middle;
