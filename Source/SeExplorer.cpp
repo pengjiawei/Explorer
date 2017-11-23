@@ -60,19 +60,23 @@ void ExplorerApplication::run(){
 
 	printf("attempt to get current pose ,prepare to explore\n");
 	NS_DataType::PoseStamped pose;
-	while(pose.pose.position.x == 0){
-		current_pose_cli->call(pose);
-		sleep(2);
-	}
+//	while(pose.pose.position.x == 0){
+//		current_pose_cli->call(pose);
+//		sleep(2);
+//	}
 	printf("get the pose = (%.4f,%.4f).first start to explore,make plan()\n",pose.pose.position.x,pose.pose.position.y);
 	makePlan();
 
 
+//	null_thread = boost::thread(
+//				boost::bind(&ExplorerApplication::null_thread_func, this));
+	while(true){
 
+	}
 }
 void ExplorerApplication::quit(){
 	running = false;
-
+	null_thread.join();
 	printf("quit ExplorerApplication\n");
 }
 void ExplorerApplication::makePlan() {
@@ -80,16 +84,16 @@ void ExplorerApplication::makePlan() {
 	  printf("begin to make plan\n");
 	  // find frontiers
 	  NS_DataType::PoseStamped pose;
-//	  explore_costmap_->getRobotPose(pose);
-	  current_pose_cli->call(pose);
-	  NS_DataType::Point p;
-	  p.x = pose.pose.position.x;
-	  p.y = pose.pose.position.y;
-	  p.z = pose.pose.position.z;
 
-//	  p.x = 0.0;
-//	  p.y = 0.0;
-//	  p.z = 0.0;
+//	  current_pose_cli->call(pose);
+	  NS_DataType::Point p;
+//	  p.x = pose.pose.position.x;
+//	  p.y = pose.pose.position.y;
+//	  p.z = pose.pose.position.z;
+
+	  p.x = 0.0;
+	  p.y = 0.0;
+	  p.z = 0.0;
 	  printf("make plan current pose = (%.4f,%.4f,%.4f)\n",p.x,p.y,p.z);
 	  auto frontiers = search_.searchFrom(p);
 	  printf("found %lu frontiers\n", frontiers.size());
@@ -221,6 +225,13 @@ void ExplorerApplication::isExploringCallback(bool isExploring){
 	printf("is exploring callback = %d\n",isExploring);
 	if(isExploring){
 		makePlan();
+	}
+}
+void ExplorerApplication::null_thread_func(){
+	NS_NaviCommon::Rate rate(1.0f);
+	while(running){
+		printf("it is looping\n");
+		rate.sleep();
 	}
 }
 

@@ -57,11 +57,12 @@ private:
 	  bool goalOnBlacklist(const NS_DataType::Point& goal);
 
 	  void isExploringCallback(bool isExploring);
+
 	  frontier_exploration::FrontierSearch search_;
 	//  ros::Timer exploring_timer_;
 	//  ros::Timer oneshot_;
 
-	  void listenningThread();
+	  void null_thread_func();
 	  std::vector<NS_DataType::Point> frontier_blacklist_;
 	  NS_DataType::Point prev_goal_;
 	  double prev_distance_;
@@ -88,7 +89,7 @@ private:
 
 	  NS_Service::Client< NS_DataType::PoseStamped >* current_pose_cli;
 
-
+	  boost::thread null_thread;
 	  bool running;
 };
 }
