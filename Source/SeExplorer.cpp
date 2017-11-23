@@ -60,9 +60,7 @@ void ExplorerApplication::run(){
 	printf("attempt to get current pose ,prepare to explore\n");
 	NS_DataType::PoseStamped pose;
 	while(pose.pose.position.x == 0){
-		if(current_pose_cli->call(pose)){
-			break;
-		}
+		current_pose_cli->call(pose);
 		sleep(2);
 	}
 	printf("get the pose = (%.4f,%.4f).first start to explore,make plan()\n",pose.pose.position.x,pose.pose.position.y);
