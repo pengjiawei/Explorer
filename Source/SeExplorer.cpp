@@ -59,7 +59,7 @@ void ExplorerApplication::run(){
 
 	printf("attempt to get current pose ,prepare to explore\n");
 	NS_DataType::PoseStamped pose;
-	while(true){
+	while(pose.pose.position.x == 0){
 		if(current_pose_cli->call(pose)){
 			break;
 		}

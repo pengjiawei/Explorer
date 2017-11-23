@@ -38,7 +38,7 @@ FrontierSearch::FrontierSearch(NS_ServiceType::ServiceMap& service_map,
 std::vector<Frontier> FrontierSearch::searchFrom(NS_DataType::Point position)
 {
 
-	printf("before search from position ,loop and get map every 2 seconds until get it\n");
+	printf("before search from position ,get map update.loop and get map every 2 seconds until get it\n");
 	NS_Service::Client< vector<unsigned char> >  char_map_cli("GLOBAL_CHARMAP");
 	vector<unsigned char> char_map;
 	while(char_map.size() == 0){
@@ -49,6 +49,23 @@ std::vector<Frontier> FrontierSearch::searchFrom(NS_DataType::Point position)
 		sleep(2);
 	}
 	printf("char_map size = %d\n",char_map.size());
+
+    FILE* mapfile;
+    mapfile = fopen("/tmp/costmap_in_explorer.log", "w");
+    for(unsigned int j = 0; j < size_y_; j++)
+    {
+      for(unsigned int i = 0; i < size_x_; i++)
+      {
+        int i_tmp = char_map[i + size_y_ * j];
+        fprintf(mapfile, "%d %d %d\n", i, j, i_tmp);
+//        if(char_map[i + ny * j] == NS_CostMap::LETHAL_OBSTACLE)
+//        {
+//          printf("char_map index %d x = %d, y = %d lethal_obstacle\n",
+//                 i + ny * j, i, j);
+//        }
+      }
+    }
+    fclose (mapfile);
 
 	map_ = new unsigned char[size_x_ * size_y_];
 	unsigned int index = 0;
