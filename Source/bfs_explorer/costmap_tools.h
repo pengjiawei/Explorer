@@ -132,7 +132,7 @@ bool nearestCell(unsigned int& result, unsigned int start, unsigned char val,
     bfs.pop();
 
     // return if cell of correct value is found
-    printf("nearest cell map[%d] = %d\n",idx,map[idx]);
+//    printf("nearest cell map[%d] = %d\n",idx,map[idx]);
     if (map[idx] == val) {
       result = idx;
       return true;
