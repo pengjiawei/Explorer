@@ -8,6 +8,8 @@
 
 #include <string>
 #include <vector>
+#include <boost/thread/thread.hpp>
+#include <boost/thread/mutex.hpp>
 
 #include <Application/Application.h>
 #include <DataSet/DataType/PoseStamped.h>
@@ -59,6 +61,7 @@ private:
 	//  ros::Timer exploring_timer_;
 	//  ros::Timer oneshot_;
 
+	  void listenningThread();
 	  std::vector<NS_DataType::Point> frontier_blacklist_;
 	  NS_DataType::Point prev_goal_;
 	  double prev_distance_;
@@ -82,6 +85,9 @@ private:
 	  NS_Service::Client< NS_ServiceType::ServiceMap >* map_cli;
 
 	  NS_DataSet::Subscriber< bool >* explore_sub;
+
+	  NS_Service::Client< NS_DataType::PoseStamped >* current_pose_cli;
+
 
 	  bool running;
 };

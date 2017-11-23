@@ -20,11 +20,6 @@ FrontierSearch::FrontierSearch(NS_ServiceType::ServiceMap& service_map,
   , gain_scale_(gain_scale)
   , min_frontier_size_(min_frontier_size)
 {
-
-	char_map_cli = new NS_Service::Client< vector<unsigned char> > ("GLOBAL_CHARMAP");
-	vector<unsigned char> char_map;
-	char_map_cli->call(char_map);
-	printf("char_map size = %d\n",char_map.size());
 //	size_x_ = service_map_.map.info.width;
 //	size_y_ = service_map_.map.info.height;
 //	origin_x_ = service_map.map.info.origin.position.x;
@@ -35,7 +30,26 @@ FrontierSearch::FrontierSearch(NS_ServiceType::ServiceMap& service_map,
 	origin_x_ = -25.0;
 	origin_y_ = -25.0;
 	resolution_ = 0.1;
-	printf("begin to initialize the costmap and costmap_tools in frontier_search size_x = %d, size_y = %d, origin_x = %.4f,origin_y = %.4f,resolution = %.4f\n",size_x_,size_y_,origin_x_,origin_y_,resolution_);
+	printf("begin to initialize costmap_tools in frontier_search size_x = %d, size_y = %d, origin_x = %.4f,origin_y = %.4f,resolution = %.4f\n",size_x_,size_y_,origin_x_,origin_y_,resolution_);
+
+	frontier_exploration::initial(resolution_,origin_x_,origin_y_,size_x_,size_y_);
+}
+
+std::vector<Frontier> FrontierSearch::searchFrom(NS_DataType::Point position)
+{
+
+	printf("before search from position ,loop and get map every 2 seconds until get it\n");
+	NS_Service::Client< vector<unsigned char> >  char_map_cli("GLOBAL_CHARMAP");
+	vector<unsigned char> char_map;
+	while(char_map.size() == 0){
+		if(char_map_cli.call(char_map)){
+			printf("call global char map success\n");
+			break;
+		}
+		sleep(2);
+	}
+	printf("char_map size = %d\n",char_map.size());
+
 	map_ = new unsigned char[size_x_ * size_y_];
 	unsigned int index = 0;
 	for(unsigned int j = 0;j < size_y_; ++j){
@@ -46,11 +60,8 @@ FrontierSearch::FrontierSearch(NS_ServiceType::ServiceMap& service_map,
 		}
 	}
 
-	frontier_exploration::initial(resolution_,origin_x_,origin_y_,size_x_,size_y_);
-}
 
-std::vector<Frontier> FrontierSearch::searchFrom(NS_DataType::Point position)
-{
+
   std::vector<Frontier> frontier_list;
 
   // Sanity check that robot is inside costmap bounds before searching

@@ -90,7 +90,6 @@ private:
     unsigned int size_x_;
     unsigned int size_y_;
   double potential_scale_, gain_scale_;
-  NS_Service::Client< vector<unsigned char> >* char_map_cli;
   size_t min_frontier_size_;
 };
 }

@@ -33,45 +33,65 @@ ExplorerApplication::ExplorerApplication()
 //  explore_costmap_->start ();
 
 	goal_pub = new NS_DataSet::Publisher< NS_DataType::Pose >("GOAL_FROM_APP");
+	explore_sub = new NS_DataSet::Subscriber< bool >("IS_EXPLORING",
+				boost::bind(&ExplorerApplication::isExploringCallback, this, _1));
 
-	explore_sub = new NS_DataSet::Subscriber< bool >("IS_EXPLORING",boost::bind(&ExplorerApplication::isExploringCallback, this, _1));
+
+	current_pose_cli = new NS_Service::Client<NS_DataType::PoseStamped>(
+			"CURRENT_POSE");
 }
 
 ExplorerApplication::~ExplorerApplication(){
+
 	delete goal_pub;
 	delete explore_sub;
+	delete current_pose_cli;
 }
 
 void ExplorerApplication::run(){
 	NS_ServiceType::ServiceMap srv_map;
 //	map_cli->call(srv_map);
+
 	search_ = frontier_exploration::FrontierSearch(srv_map,
 	                                               potential_scale_, gain_scale_,
 	                                               size_t(min_frontier_size));
 	running = true;
-	printf("start to explore,make plan()\n");
+
+	printf("attempt to get current pose ,prepare to explore\n");
+	NS_DataType::PoseStamped pose;
+	while(true){
+		if(current_pose_cli->call(pose)){
+			break;
+		}
+		sleep(2);
+	}
+	printf("get the pose = (%.4f,%.4f).first start to explore,make plan()\n",pose.pose.position.x,pose.pose.position.y);
 	makePlan();
+
+
+
 }
 void ExplorerApplication::quit(){
 	running = false;
+
 	printf("quit ExplorerApplication\n");
 }
 void ExplorerApplication::makePlan() {
 
-	  sleep(2);
-	  printf("sleep two seconds ohhhhhhhhhhhhhhhhhhh,begin to make plan\n");
+	  printf("begin to make plan\n");
 	  // find frontiers
-	  NS_Transform::Stamped<NS_Transform::Pose> pose;
-	//  explore_costmap_->getRobotPose(pose);
+	  NS_DataType::PoseStamped pose;
+//	  explore_costmap_->getRobotPose(pose);
+	  current_pose_cli->call(pose);
 	  NS_DataType::Point p;
-	  p.x = pose.getOrigin().getX();
-	  p.y = pose.getOrigin().getY();
-	  p.z = pose.getOrigin().getZ();
+	  p.x = pose.pose.position.x;
+	  p.y = pose.pose.position.y;
+	  p.z = pose.pose.position.z;
 
-	  p.x = 0.0;
-	  p.y = 0.0;
-	  p.z = 0.0;
-	  printf("current pose = (%.4f,%.4f,%.4f)\n",p.x,p.y,p.z);
+//	  p.x = 0.0;
+//	  p.y = 0.0;
+//	  p.z = 0.0;
+	  printf("make plan current pose = (%.4f,%.4f,%.4f)\n",p.x,p.y,p.z);
 	  auto frontiers = search_.searchFrom(p);
 	  printf("found %lu frontiers\n", frontiers.size());
 	  for (size_t i = 0; i < frontiers.size(); ++i) {
@@ -204,6 +224,7 @@ void ExplorerApplication::isExploringCallback(bool isExploring){
 		makePlan();
 	}
 }
+
 }
 //int main() {
 //	NS_Explorer::ExplorerApplication* explorer = new NS_Explorer::ExplorerApplication();
