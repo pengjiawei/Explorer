@@ -187,7 +187,7 @@ void ExplorerApplication::makePlan() {
 void ExplorerApplication::loadParameter() {
 
 	NS_NaviCommon::Parameter parameter;
-
+	parameter.loadConfigurationFile("explorer.xml");
 	planner_frequency_ = parameter.getParameter ("planner_frequency", 1.0f);
 
 	progress_timeout_ = NS_NaviCommon::Duration(parameter.getParameter ("progress_timeout", 30.0f));
