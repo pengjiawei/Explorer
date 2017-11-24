@@ -60,10 +60,10 @@ void ExplorerApplication::run(){
 
 	printf("attempt to get current pose ,prepare to explore\n");
 	NS_DataType::PoseStamped pose;
-//	while(pose.pose.position.x == 0){
-//		current_pose_cli->call(pose);
-//		sleep(2);
-//	}
+	while(pose.pose.position.x == 0){
+		current_pose_cli->call(pose);
+		sleep(2);
+	}
 	printf("get the pose = (%.4f,%.4f).first start to explore,make plan()\n",pose.pose.position.x,pose.pose.position.y);
 	makePlan();
 
@@ -85,15 +85,15 @@ void ExplorerApplication::makePlan() {
 	  // find frontiers
 	  NS_DataType::PoseStamped pose;
 
-//	  current_pose_cli->call(pose);
+	  current_pose_cli->call(pose);
 	  NS_DataType::Point p;
-//	  p.x = pose.pose.position.x;
-//	  p.y = pose.pose.position.y;
-//	  p.z = pose.pose.position.z;
+	  p.x = pose.pose.position.x;
+	  p.y = pose.pose.position.y;
+	  p.z = pose.pose.position.z;
 
-	  p.x = 0.0;
-	  p.y = 0.0;
-	  p.z = 0.0;
+//	  p.x = 0.0;
+//	  p.y = 0.0;
+//	  p.z = 0.0;
 	  printf("make plan current pose = (%.4f,%.4f,%.4f)\n",p.x,p.y,p.z);
 	  auto frontiers = search_.searchFrom(p);
 	  printf("found %lu frontiers\n", frontiers.size());
