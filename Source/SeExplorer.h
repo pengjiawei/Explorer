@@ -91,6 +91,8 @@ private:
 
 	  boost::thread null_thread;
 	  bool running;
+
+	  unsigned int sleep_seconds;
 };
 }
 #endif

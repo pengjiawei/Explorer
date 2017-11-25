@@ -201,6 +201,8 @@ void ExplorerApplication::loadParameter() {
 	min_frontier_size = parameter.getParameter ("min_frontier_size", 10);
 
 	prev_distance_ = parameter.getParameter("prev_distance",0);
+
+	sleep_seconds = parameter.getParameter("sleep_seconds",2);
 }
 
 bool ExplorerApplication::goalOnBlacklist(
@@ -225,6 +227,8 @@ bool ExplorerApplication::goalOnBlacklist(
 void ExplorerApplication::isExploringCallback(bool isExploring){
 	printf("is exploring callback = %d\n",isExploring);
 	if(isExploring){
+		printf("sleep several seconds  = %d for mapping\n",sleep_seconds);
+		sleep(sleep_seconds);
 		makePlan();
 	}
 }
