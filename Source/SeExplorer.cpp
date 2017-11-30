@@ -51,13 +51,7 @@ ExplorerApplication::~ExplorerApplication(){
 }
 
 void ExplorerApplication::run(){
-	NS_ServiceType::ServiceMap srv_map;
-	map_cli->call(srv_map);
 
-	search_ = frontier_exploration::FrontierSearch(srv_map,
-	                                               potential_scale_, gain_scale_,
-	                                               size_t(min_frontier_size),threshold);
-	running = true;
 
 	printf("attempt to get current pose ,prepare to explore\n");
 	NS_DataType::PoseStamped pose;
@@ -66,6 +60,15 @@ void ExplorerApplication::run(){
 		sleep(2);
 	}
 	printf("get the pose = (%.4f,%.4f).first start to explore,make plan()\n",pose.pose.position.x,pose.pose.position.y);
+
+	NS_ServiceType::ServiceMap srv_map;
+	map_cli->call(srv_map);
+
+	search_ = frontier_exploration::FrontierSearch(srv_map,
+	                                               potential_scale_, gain_scale_,
+	                                               size_t(min_frontier_size),threshold);
+	running = true;
+
 	makePlan();
 
 
