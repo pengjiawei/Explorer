@@ -21,16 +21,16 @@ FrontierSearch::FrontierSearch(NS_ServiceType::ServiceMap& service_map,
   , min_frontier_size_(min_frontier_size)
   ,threshold_(threshold)
 {
-//	size_x_ = service_map_.map.info.width;
-//	size_y_ = service_map_.map.info.height;
-//	origin_x_ = service_map.map.info.origin.position.x;
-//	origin_y_ = service_map.map.info.origin.position.y;
-//	resolution_ = service_map.map.info.resolution;
-	size_x_ = 480;
-	size_y_ = 480;
-	origin_x_ = -25.0;
-	origin_y_ = -25.0;
-	resolution_ = 0.1;
+	size_x_ = service_map_.map.info.width;
+	size_y_ = service_map_.map.info.height;
+	origin_x_ = service_map.map.info.origin.position.x;
+	origin_y_ = service_map.map.info.origin.position.y;
+	resolution_ = service_map.map.info.resolution;
+//	size_x_ = 480;
+//	size_y_ = 480;
+//	origin_x_ = -25.0;
+//	origin_y_ = -25.0;
+//	resolution_ = 0.1;
 	printf("begin to initialize costmap_tools in frontier_search size_x = %d, size_y = %d, origin_x = %.4f,origin_y = %.4f,resolution = %.4f\n",size_x_,size_y_,origin_x_,origin_y_,resolution_);
 
 	frontier_exploration::initial(resolution_,origin_x_,origin_y_,size_x_,size_y_);

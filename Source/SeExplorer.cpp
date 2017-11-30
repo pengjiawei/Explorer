@@ -47,11 +47,12 @@ ExplorerApplication::~ExplorerApplication(){
 	delete goal_pub;
 	delete explore_sub;
 	delete current_pose_cli;
+	delete map_cli;
 }
 
 void ExplorerApplication::run(){
 	NS_ServiceType::ServiceMap srv_map;
-//	map_cli->call(srv_map);
+	map_cli->call(srv_map);
 
 	search_ = frontier_exploration::FrontierSearch(srv_map,
 	                                               potential_scale_, gain_scale_,
