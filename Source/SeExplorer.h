@@ -75,6 +75,7 @@ private:
 	  NS_NaviCommon::Duration progress_timeout_;
 	  int min_frontier_size;
 
+	  int threshold;
 
 	  double resolution_;
 

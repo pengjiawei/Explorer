@@ -38,7 +38,7 @@ public:
    * @param costmap Reference to costmap data to search.
    */
   FrontierSearch(NS_ServiceType::ServiceMap& costmap_wrapper, double potential_scale,
-                 double gain_scale, size_t min_frontier_size);
+                 double gain_scale, size_t min_frontier_size,int threshold);
 
   /**
    * @brief Runs search implementation, outward from the start position
@@ -90,6 +90,7 @@ private:
     unsigned int size_x_;
     unsigned int size_y_;
   double potential_scale_, gain_scale_;
+  int threshold_;
   size_t min_frontier_size_;
 };
 }

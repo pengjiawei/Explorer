@@ -55,7 +55,7 @@ void ExplorerApplication::run(){
 
 	search_ = frontier_exploration::FrontierSearch(srv_map,
 	                                               potential_scale_, gain_scale_,
-	                                               size_t(min_frontier_size));
+	                                               size_t(min_frontier_size),threshold);
 	running = true;
 
 	printf("attempt to get current pose ,prepare to explore\n");
@@ -84,7 +84,7 @@ void ExplorerApplication::makePlan() {
 	  printf("begin to make plan\n");
 	  // find frontiers
 	  NS_DataType::PoseStamped pose;
-
+//
 	  current_pose_cli->call(pose);
 	  NS_DataType::Point p;
 	  p.x = pose.pose.position.x;
@@ -203,6 +203,8 @@ void ExplorerApplication::loadParameter() {
 	prev_distance_ = parameter.getParameter("prev_distance",0);
 
 	sleep_seconds = parameter.getParameter("sleep_seconds",2);
+
+	threshold = parameter.getParameter("threshold",253);
 }
 
 bool ExplorerApplication::goalOnBlacklist(

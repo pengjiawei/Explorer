@@ -14,11 +14,12 @@ bool lessFrontierCost(Frontier& f1,Frontier& f2){
 
 FrontierSearch::FrontierSearch(NS_ServiceType::ServiceMap& service_map,
                                double potential_scale, double gain_scale,
-                               size_t min_frontier_size)
+                               size_t min_frontier_size,int threshold)
   : service_map_(service_map)
   , potential_scale_(potential_scale)
   , gain_scale_(gain_scale)
   , min_frontier_size_(min_frontier_size)
+  ,threshold_(threshold)
 {
 //	size_x_ = service_map_.map.info.width;
 //	size_y_ = service_map_.map.info.height;
@@ -119,7 +120,9 @@ std::vector<Frontier> FrontierSearch::searchFrom(NS_DataType::Point position)
       // add to queue all free, unvisited cells, use descending search in case
       // initialized on non-free cell
 //      if (map_[nbr] <= map_[idx] && !visited_flag[nbr]) {
-      if (map_[nbr] < INSCRIBED_INFLATED_OBSTACLE && !visited_flag[nbr]) {
+//    	printf("threshold = %d\n",threshold_);
+
+      if (map_[nbr] < (unsigned char)threshold_ && !visited_flag[nbr]) {
         visited_flag[nbr] = true;
         bfs.push(nbr);
         // check if cell is new frontier cell (unvisited, NO_INFORMATION, free
