@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <Transform/DataTypes.h>
 #include "bfs_explorer/frontier_search.h"
+#include <Mission/Issuer.h>
 
 namespace NS_Explorer {
 class ExplorerApplication : public Application{
@@ -90,6 +91,7 @@ private:
 
 	  NS_Service::Client< NS_DataType::PoseStamped >* current_pose_cli;
 
+	  NS_Mission::Issuer* explorer_issuer;
 	  boost::thread null_thread;
 	  bool running;
 

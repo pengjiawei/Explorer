@@ -10,6 +10,7 @@
 #include <Parameter/Parameter.h>
 #include <thread>
 #include "SeExplorer.h"
+
 using namespace std;
 inline static bool operator==(const NS_DataType::Point& one,
                               const NS_DataType::Point& two)
@@ -40,6 +41,9 @@ ExplorerApplication::ExplorerApplication()
 	current_pose_cli = new NS_Service::Client<NS_DataType::PoseStamped>(
 			"CURRENT_POSE");
 
+	explorer_issuer = new NS_Mission::Issuer();
+
+
 }
 
 ExplorerApplication::~ExplorerApplication(){
@@ -48,6 +52,8 @@ ExplorerApplication::~ExplorerApplication(){
 	delete explore_sub;
 	delete current_pose_cli;
 	delete map_cli;
+
+	delete explorer_issuer;
 }
 
 void ExplorerApplication::run(){
@@ -159,13 +165,17 @@ void ExplorerApplication::makePlan() {
 	  goal_pose.header.stamp = NS_NaviCommon::Time::now();
 	  printf("goal_pose = (%.4f,%.4f)\n",goal_pose.pose.position.x,goal_pose.pose.position.y);
 
-	  NS_DataType::PoseStamped published_pose;
-	  published_pose.header.frame_id = "global_frame";
-	  published_pose.pose.position.x = goal_pose.pose.position.x;
-	  published_pose.pose.position.y = goal_pose.pose.position.y;
-	  published_pose.pose.orientation = NS_Transform::createQuaternionMsgFromYaw(0.0);
-	  printf("print goal to global planner------------------\n");
-	  goal_pub->publish(published_pose);
+//	  NS_DataType::PoseStamped published_pose;
+//	  published_pose.header.frame_id = "global_frame";
+//	  published_pose.pose.position.x = goal_pose.pose.position.x;
+//	  published_pose.pose.position.y = goal_pose.pose.position.y;
+//	  published_pose.pose.orientation = NS_Transform::createQuaternionMsgFromYaw(0.0);
+//
+//	  goal_pub->publish(published_pose);
+
+	  printf("explorer issuer action!------------------\n");
+	  explorer_issuer->action(goal_pose.pose.position.x,goal_pose.pose.position.y,0.0);
+
 	  NS_DataType::Point middle_point = frontier->middle;
 	  printf("middle_point x = %.4f,y = %.4f\n",middle_point.x,middle_point.y);
 	  std::vector<NS_DataType::Point> final_points = frontier->points;
