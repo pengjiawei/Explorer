@@ -174,7 +174,7 @@ void ExplorerApplication::makePlan() {
 //	  goal_pub->publish(published_pose);
 
 	  printf("explorer issuer action!------------------\n");
-	  explorer_issuer->action(goal_pose.pose.position.x,goal_pose.pose.position.y,0.0);
+	  explorer_issuer->action(goal_pose.pose.position.x,goal_pose.pose.position.y,0.0,timeout);
 
 	  NS_DataType::Point middle_point = frontier->middle;
 	  printf("middle_point x = %.4f,y = %.4f\n",middle_point.x,middle_point.y);
@@ -219,6 +219,8 @@ void ExplorerApplication::loadParameter() {
 	sleep_seconds = parameter.getParameter("sleep_seconds",2);
 
 	threshold = parameter.getParameter("threshold",253);
+
+	timeout = parameter.getParameter("timeout",60);
 }
 
 bool ExplorerApplication::goalOnBlacklist(
